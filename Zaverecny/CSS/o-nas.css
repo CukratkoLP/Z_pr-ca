@@ -1,0 +1,31 @@
+body{
+    background-image: linear-gradient(to right, #007fe0, #008ce4, #1799e7, #31a6ea, #48b2eb, #48b1ea, #48b0e8, #48afe7, #31a2e3, #1a94df, #0286da, #0077d3);
+}
+.main1{
+    height: 625px;
+    background-image: url(/IMG/omne.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.main1 p {
+    color:azure;
+    position: relative; 
+    font-size: 1rem;
+    font-family:cursive;
+    top: 50%; 
+    left: 10%; 
+    transform: translateY(-10%); 
+    margin: 0; 
+}
+.main1 tr td {
+    color: azure;
+    font-family: cursive;
+}
+
+caption{
+    color: azure;
+    font-family: cursive;
+}
+.main1 table{
+    margin-left: 15%;
+}

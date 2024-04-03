@@ -1,0 +1,15 @@
+*{
+    margin: 0px;
+}
+
+body{
+    background-image: linear-gradient(to right, #007fe0, #008ce4, #1799e7, #31a6ea, #48b2eb, #48b1ea, #48b0e8, #48afe7, #31a2e3, #1a94df, #0286da, #0077d3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 10rem;
+    font-family: cursive;
+    color:aliceblue;
+    text-align: center;
+  }

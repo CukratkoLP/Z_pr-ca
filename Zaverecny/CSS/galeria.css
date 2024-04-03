@@ -1,0 +1,62 @@
+.slides-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    }
+.slides-container p{
+    font-family: cursive;
+    color:aliceblue;
+    font-size: 2rem;
+    margin-top: 50px;
+}
+.slide, .slide img{
+    width:100%;
+    height: auto;
+    }
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+.slide-text {
+    color: #f2f2f2;
+    font-family: cursive;
+    font-size: 5vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 8px 12px;
+    position: absolute;
+    max-width: 100%;
+    width:100%;
+    text-align: center;
+    bottom: 20%;
+}
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+body{
+    background-image: linear-gradient(to right, #007fe0, #008ce4, #1799e7, #31a6ea, #48b2eb, #48b1ea, #48b0e8, #48afe7, #31a2e3, #1a94df, #0286da, #0077d3);
+}

@@ -10,9 +10,19 @@
     <header class="header">
         <a href="#" class="logo">Logo</a>     
         <nav class="navbar">
-            <a href="domov.php">Domov</a>
-            <a href="Q&A.php">Q&A</a>
-            <a href="login.php">Login</a>
+            <?php
+            $links = [
+                ['href' => 'domov.php', 'text' => 'Domov'],
+                ['href' => 'Q&A.php', 'text' => 'Q&A'],
+                ['href' => 'login.php', 'text' => 'Login'],
+                ['href' => 'register.php', 'text' => 'Register']
+            ];
+
+            foreach ($links as $link) {
+                echo '<a href="' . $link['href'] . '">' . $link['text'] . '</a>';
+            }
+            ?>
         </nav>
+    </header>
         
     </header>

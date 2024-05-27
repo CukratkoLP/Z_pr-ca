@@ -1,0 +1,29 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.text-container,
+.image-container {
+    width: 50%;
+}
+
+.text-container p,
+.image-container img {
+    margin-bottom: 20px;
+}
+
+
+.text-container p {
+    font-size: 16px;
+    color: white;
+    width: 80%;
+    height: 300px;
+}
+
+img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}

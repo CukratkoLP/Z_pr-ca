@@ -11,8 +11,6 @@
         <a href="#" class="logo">Logo</a>     
         <nav class="navbar">
             <a href="domov.php">Domov</a>
-            <a href="Minihry.php">Minihry</a>
-            <a href="onas.php">Kto sme</a>
             <a href="Q&A.php">Q&A</a>
             <a href="login.php">Login</a>
         </nav>

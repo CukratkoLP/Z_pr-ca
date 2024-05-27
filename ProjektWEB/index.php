@@ -2,8 +2,8 @@
     include_once('Partials\header.php');
 ?>
 
-   <main>
-    <p>Test 123</p>
+    <main>
+        
     </main>
 
 <?php

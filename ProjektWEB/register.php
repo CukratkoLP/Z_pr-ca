@@ -1,6 +1,6 @@
 <?php
     include_once('Partials\header.php');
-    include_once('db_conn.php');
+    include_once('Partials\db_conn.php');
 ?>
 
 <link rel="stylesheet" href="register.css">

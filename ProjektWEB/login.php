@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db_conn.php";
+include "Partials\db_conn.php";
 
 class Login {
     private $conn;

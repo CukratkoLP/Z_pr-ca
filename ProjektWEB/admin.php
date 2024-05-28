@@ -20,7 +20,9 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     <link rel="stylesheet" href="CSS/user.css">
     <h1> Welcome back, <?php echo $_SESSION['user_name']; ?></h1>
     <?php
-include_once('db_conn.php');
+include_once('Partials\db_conn.php');
+include_once('Partials\header.php');
+
 
 if(isset($_POST['update'])) {
     $id = $_POST['id'];
@@ -52,16 +54,15 @@ if(isset($_POST['delete'])) {
 
 if(isset($_POST['create'])) {
     $username = $_POST['new_username'];
-    $password = $_POST['new_password'];
+    $password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
     $level = $_POST['new_level'];
 
-    $sql = "INSERT INTO users (user_name, password, level) VALUES ('$username','$password', '$level')";
+    $sql = "INSERT INTO users (user_name, password, level) VALUES ('$username', '$password', '$level')";
     $result = $conn->query($sql);
 
     if($result) {
         header("Location: admin.php");
         exit();
-        echo "User created successfully";
     } else {
         echo "Error creating user: " . $conn->error;
     }

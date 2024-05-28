@@ -40,10 +40,11 @@
             }
 
             $level = "user";
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             $sql = "INSERT INTO users (user_name, password, level) VALUES (?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("sss", $username, $password, $level);
+            $stmt->bind_param("sss", $username, $hashed_password, $level);
 
             if($stmt->execute()){
                 echo "New user created successfully, <br> ";

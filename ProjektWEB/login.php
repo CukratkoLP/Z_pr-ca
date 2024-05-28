@@ -26,22 +26,23 @@ class Login {
             exit();
         }
         else {
-            $stmt = $this->conn->prepare("SELECT * FROM users WHERE user_name=? AND password=?");
-            $stmt->bind_param("ss", $uname, $pass);
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE user_name=?");
+            $stmt->bind_param("s", $uname);
             $stmt->execute();
             $result = $stmt->get_result();
-    
+
             if($result->num_rows === 1) {
                 $row = $result->fetch_assoc();
-                if($row['user_name'] === $uname && $row['password'] === $pass) {
+                if($row['user_name'] === $uname && password_verify($pass, $row['password'])) {
                     $_SESSION['user_name'] = $row['user_name'];
                     $_SESSION['name'] = $row['name'];
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['level'] = $row['level']; 
-    
+                
                     if($row['level'] === 'admin') {
                         header("Location: admin.php");
-                    } else {
+                    } 
+                    else {
                         header("Location: user.php");
                     }
                 }

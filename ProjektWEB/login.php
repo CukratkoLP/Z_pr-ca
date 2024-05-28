@@ -2,58 +2,76 @@
 session_start();
 include "db_conn.php";
 
-function validate($data){
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+class Login {
+    private $conn;
 
-if(isset($_POST['uname']) && isset($_POST['password'])) {
-    $uname = validate($_POST['uname']);
-    $pass = validate($_POST['password']);
-
-    if(empty($uname)) {
-        header("Location: login.php?error=User Name is required");
-        exit();
+    public function __construct($conn) {
+        $this->conn = $conn;
     }
-    else if(empty($pass)) {
-        header("Location: login.php?error=Password is required");
-        exit();
+
+    public function validate($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
-    else {
-        $sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
 
-        $result = mysqli_query($conn, $sql);
-
-        if(mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
-            if($row['user_name'] === $uname && $row['password'] === $pass) {
-                $_SESSION['user_name'] = $row['user_name'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['id'] = $row['id'];
-                header("Location: user.php");
+    public function loginUser($uname, $pass) {
+        if(empty($uname)) {
+            header("Location: login.php?error=User Name is required");
+            exit();
+        }
+        else if(empty($pass)) {
+            header("Location: login.php?error=Password is required");
+            exit();
+        }
+        else {
+            $stmt = $this->conn->prepare("SELECT * FROM users WHERE user_name=? AND password=?");
+            $stmt->bind_param("ss", $uname, $pass);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            if($result->num_rows === 1) {
+                $row = $result->fetch_assoc();
+                if($row['user_name'] === $uname && $row['password'] === $pass) {
+                    $_SESSION['user_name'] = $row['user_name'];
+                    $_SESSION['name'] = $row['name'];
+                    $_SESSION['id'] = $row['id'];
+                    $_SESSION['level'] = $row['level']; 
+    
+                    if($row['level'] === 'admin') {
+                        header("Location: admin.php");
+                    } else {
+                        header("Location: user.php");
+                    }
+                }
+                else {
+                    header("Location: login.php?error=Incorrect User name or password");
+                    exit();
+                }
             }
             else {
-                header("Location: login.php?error=Incorect User name or password");
+                header("Location: login.php?error=Incorrect User name or password");
                 exit();
+            }
         }
     }
-    else {
-        header("Location: login.php?error=Incorect User name or password");
-        exit();
-    }
-    }
+}
+$login = new Login($conn);
+
+if(isset($_POST['uname']) && isset($_POST['password'])) {
+    $uname = $login->validate($_POST['uname']);
+    $pass = $login->validate($_POST['password']);
+    $login->loginUser($uname, $pass);
 }
 ?>
 
 <?php
     include_once('Partials\header.php');
 ?>
-    <link rel="stylesheet" href="CSS/login.css">
 <main>
     <form action="login.php" method="post">
-        <h2>LOGIN</h2>
+        <h1>Login</h1>
         <?php if(isset($_GET['error'])) { ?>
             <p class="error"> <?php echo $_GET['error']; ?></p>
         <?php } ?>

@@ -7,7 +7,7 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name'])) {
     include_once('Partials\header.php');
 ?>
     <link rel="stylesheet" href="CSS/user.css">
-    <h1> Hello, <?php echo $_SESSION['user_name']; ?></h1>
+    <h1> Welcome back user <?php echo $_SESSION['user_name']; ?></h1>
 <?php
     include_once('Partials\footer.php');
 ?>

@@ -8,26 +8,38 @@
 
     include_once('Partials\db_conn.php');
 
+    class Question {
+        private $conn;
+
+        public function __construct($conn) {
+            $this->conn = $conn;
+        }
+
+        public function submitQuestion($email, $question, $user) {
+            $sql = "INSERT INTO questions (email, question, user) VALUES ('$email', '$question', '$user')";
+            $result = $this->conn->query($sql);
+
+            if($result) {
+                $_SESSION['message'] = "Question submitted successfully";
+            } else {
+                $_SESSION['message'] = "Error submitting question: " . $this->conn->error;
+            }
+
+            header("Location: Q&A.php");
+            exit();
+        }
+    }
+
     if(isset($_POST['submit'])) {
         $email = $_POST['email'];
         $question = $_POST['question'];
         $user = $_SESSION['user_name'];
-    
-        $sql = "INSERT INTO questions (email, question, user) VALUES ('$email', '$question', '$user')";
-        $result = $conn->query($sql);
-    
-        if($result) {
-            $_SESSION['message'] = "Question submitted successfully";
-        } else {
-            $_SESSION['message'] = "Error submitting question: " . $conn->error;
-        }
-    
-        header("Location: Q&A.php");
-        exit();
-    }
-?>
 
-<?php
+        $questionObj = new Question($conn);
+        $questionObj->submitQuestion($email, $question, $user);
+    }
+
+
     include_once('Partials\header.php');
 ?>
 

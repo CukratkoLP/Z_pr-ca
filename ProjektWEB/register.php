@@ -3,7 +3,6 @@
     include_once('Partials\db_conn.php');
 ?>
 
-<link rel="stylesheet" href="register.css">
 <main>
     <form action="register.php" method="post">
     <h1>Register</h1>
